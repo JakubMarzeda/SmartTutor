@@ -1,12 +1,13 @@
-import { useState } from 'react'
+import Register from './pages/Register/Register';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
-  const [count, setCount] = useState<number>(0);
   return (
-    <>
-      <button onClick={() => setCount(count => count + 1)}>Click me</button>
-      <p>Count: {count}</p>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
