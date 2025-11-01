@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { authService } from "../../services/authService";
-import "./Register.css";
+import "./Login.css";
 
-export default function Register() {
-  const [fullName, setFullName] = useState<string>("");
+export default function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -14,63 +13,46 @@ export default function Register() {
     e.preventDefault();
     setLoading(true);
     setError(null);
+
     try {
-      const { error } = await authService.signUp(
-        fullName,
-        email,
-        password
-      );
+      const { error } = await authService.signIn(email, password);
       if (error) {
-        setError(error.message || "Failed to create account");
+        setError(error.message || "Failed to sign in");
       } else {
-        setFullName("");
         setEmail("");
         setPassword("");
       }
     } catch (err) {
       setError("Something went wrong");
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
   };
 
-  const handleGoogleSignUp = async () => {
+  const handleGoogleSignIn = async () => {
     setGoogleLoading(true);
     setError(null);
     try {
-      const { error } = await authService.authenticateWithGoogle();
-      if (error) {
-        setError(error.message || "Failed to sign in with Google");
-      }
+        const { error } = await authService.authenticateWithGoogle();
+        if (error) {
+            setError(error.message || "Failed to sign in with Google");
+        }
     } catch (err) {
-      setError("Something went wrong");
+        setError("Something went wrong");
     } finally {
-      setGoogleLoading(false);
+        setGoogleLoading(false);
     }
-  };
+  }
 
   return (
-    <div className="register-container">
-      <div className="register-card">
-        <div className="register-header">
-          <h1 className="register-title">Create Account</h1>
-          <p className="register-subtitle">Join us and start your learning journey</p>
+    <div className="login-container">
+      <div className="login-card">
+        <div className="login-header">
+          <h1 className="login-title">Welcome Back</h1>
+          <p className="login-subtitle">Sign in to continue your learning journey</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="register-form">
-          <div className="form-group">
-            <label htmlFor="fullName">Full Name</label>
-            <input
-              id="fullName"
-              type="text"
-              placeholder="Enter your full name"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              required
-              disabled={loading}
-            />
-          </div>
-
+        <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -89,12 +71,11 @@ export default function Register() {
             <input
               id="password"
               type="password"
-              placeholder="Create a password"
+              placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
               disabled={loading}
-              minLength={6}
             />
           </div>
 
@@ -113,10 +94,10 @@ export default function Register() {
             {loading ? (
               <>
                 <span className="spinner"></span>
-                <span>Creating account...</span>
+                <span>Signing in...</span>
               </>
             ) : (
-              "Create Account"
+              "Sign In"
             )}
           </button>
 
@@ -127,7 +108,7 @@ export default function Register() {
           <button 
             type="button"
             className="google-button"
-            onClick={handleGoogleSignUp}
+            onClick={handleGoogleSignIn}
             disabled={loading || googleLoading}
           >
             {googleLoading ? (
@@ -148,14 +129,14 @@ export default function Register() {
             )}
           </button>
 
-          <div className="register-footer">
+          <div className="login-footer">
             <p>
-              Already have an account?{" "}
-              <a href="/login" className="login-link">Sign in</a>
+              Don't have an account?{" "}
+              <a href="/register" className="register-link">Sign up</a>
             </p>
           </div>
         </form>
       </div>
     </div>
-  );
+  )
 }
