@@ -21,14 +21,14 @@ export default function Register() {
         password
       );
       if (error) {
-        setError(error.message || "Failed to create account");
+        setError(error.message || "Błąd tworzenia konta");
       } else {
         setFullName("");
         setEmail("");
         setPassword("");
       }
     } catch (err) {
-      setError("Something went wrong");
+      setError("Coś poszło nie tak");
     } finally {
       setLoading(false);
     }
@@ -40,10 +40,10 @@ export default function Register() {
     try {
       const { error } = await authService.authenticateWithGoogle();
       if (error) {
-        setError(error.message || "Failed to sign in with Google");
+        setError(error.message || "Błąd logowania przez Google");
       }
     } catch (err) {
-      setError("Something went wrong");
+      setError("Coś poszło nie tak");
     } finally {
       setGoogleLoading(false);
     }
@@ -53,17 +53,17 @@ export default function Register() {
     <div className="register-container">
       <div className="register-card">
         <div className="register-header">
-          <h1 className="register-title">Create Account</h1>
-          <p className="register-subtitle">Join us and start your learning journey</p>
+          <h1 className="register-title">Utwórz konto</h1>
+          <p className="register-subtitle">Dołącz do nas i rozpocznij swoją naukę</p>
         </div>
 
         <form onSubmit={handleSubmit} className="register-form">
           <div className="form-group">
-            <label htmlFor="fullName">Full Name</label>
+            <label htmlFor="fullName">Imię i nazwisko</label>
             <input
               id="fullName"
               type="text"
-              placeholder="Enter your full name"
+              placeholder="Wprowadź swoje imię i nazwisko"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               required
@@ -76,7 +76,7 @@ export default function Register() {
             <input
               id="email"
               type="email"
-              placeholder="Enter your email"
+              placeholder="Wprowadź swój email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -85,11 +85,11 @@ export default function Register() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Hasło</label>
             <input
               id="password"
               type="password"
-              placeholder="Create a password"
+              placeholder="Utwórz hasło (minimum 6 znaków)"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -113,15 +113,15 @@ export default function Register() {
             {loading ? (
               <>
                 <span className="spinner"></span>
-                <span>Creating account...</span>
+                <span>Tworzenie konta...</span>
               </>
             ) : (
-              "Create Account"
+              "Utwórz konto"
             )}
           </button>
 
           <div className="divider">
-            <span>OR</span>
+            <span>LUB</span>
           </div>
 
           <button 
@@ -133,7 +133,7 @@ export default function Register() {
             {googleLoading ? (
               <>
                 <span className="spinner"></span>
-                <span>Connecting...</span>
+                <span>Łączenie...</span>
               </>
             ) : (
               <>
@@ -143,15 +143,15 @@ export default function Register() {
                   <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
                   <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                 </svg>
-                <span>Continue with Google</span>
+                <span>Zaloguj przez Google</span>
               </>
             )}
           </button>
 
           <div className="register-footer">
             <p>
-              Already have an account?{" "}
-              <a href="/login" className="login-link">Sign in</a>
+              Masz już konto?{" "}
+              <a href="/login" className="login-link">Zaloguj się</a>
             </p>
           </div>
         </form>

@@ -17,13 +17,13 @@ export default function Login() {
     try {
       const { error } = await authService.signIn(email, password);
       if (error) {
-        setError(error.message || "Failed to sign in");
+        setError(error.message || "Błąd logowania");
       } else {
         setEmail("");
         setPassword("");
       }
     } catch (err) {
-      setError("Something went wrong");
+      setError("Coś poszło nie tak");
     } finally {
         setLoading(false);
     }
@@ -35,10 +35,10 @@ export default function Login() {
     try {
         const { error } = await authService.authenticateWithGoogle();
         if (error) {
-            setError(error.message || "Failed to sign in with Google");
+            setError(error.message || "Błąd logowania przez Google");
         }
     } catch (err) {
-        setError("Something went wrong");
+        setError("Coś poszło nie tak");
     } finally {
         setGoogleLoading(false);
     }
@@ -48,8 +48,8 @@ export default function Login() {
     <div className="login-container">
       <div className="login-card">
         <div className="login-header">
-          <h1 className="login-title">Welcome Back</h1>
-          <p className="login-subtitle">Sign in to continue your learning journey</p>
+          <h1 className="login-title">Witaj ponownie</h1>
+          <p className="login-subtitle">Zaloguj się, aby kontynuować naukę</p>
         </div>
 
         <form onSubmit={handleSubmit} className="login-form">
@@ -58,7 +58,7 @@ export default function Login() {
             <input
               id="email"
               type="email"
-              placeholder="Enter your email"
+              placeholder="Wprowadź swój email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -67,11 +67,11 @@ export default function Login() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Hasło</label>
             <input
               id="password"
               type="password"
-              placeholder="Enter your password"
+              placeholder="Wprowadź swoje hasło"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -94,15 +94,15 @@ export default function Login() {
             {loading ? (
               <>
                 <span className="spinner"></span>
-                <span>Signing in...</span>
+                <span>Logowanie...</span>
               </>
             ) : (
-              "Sign In"
+              "Zaloguj się"
             )}
           </button>
 
           <div className="divider">
-            <span>OR</span>
+            <span>LUB</span>
           </div>
 
           <button 
@@ -114,7 +114,7 @@ export default function Login() {
             {googleLoading ? (
               <>
                 <span className="spinner"></span>
-                <span>Connecting...</span>
+                <span>Łączenie...</span>
               </>
             ) : (
               <>
@@ -124,15 +124,15 @@ export default function Login() {
                   <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
                   <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                 </svg>
-                <span>Continue with Google</span>
+                <span>Zaloguj przez Google</span>
               </>
             )}
           </button>
 
           <div className="login-footer">
             <p>
-              Don't have an account?{" "}
-              <a href="/register" className="register-link">Sign up</a>
+              Nie masz konta?{" "}
+              <a href="/register" className="register-link">Zarejestruj się</a>
             </p>
           </div>
         </form>
