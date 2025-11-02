@@ -9,6 +9,7 @@ type Lesson = {
 
 type UpcomingLessonsProps = {
   lessons?: Lesson[];
+  onCancel?: (lessonId: string) => void;
 };
 
 // Przykładowe dane - później z API
@@ -27,7 +28,7 @@ const mockLessons: Lesson[] = [
   }
 ];
 
-export default function UpcomingLessons({ lessons = mockLessons }: UpcomingLessonsProps) {
+export default function UpcomingLessons({ lessons = mockLessons, onCancel }: UpcomingLessonsProps) {
   const upcomingLessons = lessons.filter(lesson => lesson.status === 'upcoming');
 
   if (upcomingLessons.length === 0) {
@@ -58,7 +59,12 @@ export default function UpcomingLessons({ lessons = mockLessons }: UpcomingLesso
               <span className="lesson-time">{lesson.time}</span>
             </div>
             <div className="lesson-actions">
-              <button className="lesson-btn cancel">Anuluj</button>
+              <button 
+                className="lesson-btn cancel"
+                onClick={() => onCancel && onCancel(lesson.id)}
+              >
+                Anuluj
+              </button>
             </div>
           </div>
         ))}

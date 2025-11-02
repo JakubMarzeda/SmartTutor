@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
-import { authService } from '../services/authService';
+import { authService } from '../../services/authService';
 import { useState, useEffect } from 'react';
-import { supabase } from '../lib/supabase/client';
+import { supabase } from '../../lib/supabase/client';
 import { Navigate } from 'react-router-dom';
 
 export default function ProtectedRoute({children}: {children: ReactNode}) {

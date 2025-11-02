@@ -5,21 +5,39 @@ type BookingSummaryProps = {
   selectedTime: string | null;
   selectedClass?: string;
   selectedTopic?: string;
-  price?: number;
+  price?: number; // Opcjonalne - jeśli nie podano, obliczane automatycznie
   onBook: () => void;
 };
-
-const DEFAULT_PRICE = 50; // Możesz później pobierać z API
 
 export default function BookingSummary({ 
   selectedDate, 
   selectedTime,
   selectedClass,
   selectedTopic,
-  price = DEFAULT_PRICE,
+  price: priceProp,
   onBook 
 }: BookingSummaryProps) {
   const canBook = selectedDate && selectedTime && selectedClass;
+  
+  // Oblicz cenę na podstawie wybranego poziomu
+  const calculatePrice = (classLevel: string): number => {
+    // Szkoła podstawowa
+    if (classLevel.startsWith('sp-')) {
+      return 50;
+    }
+    // Liceum/Technikum - poziom podstawowy
+    if (classLevel.includes('-podst')) {
+      return 60;
+    }
+    // Liceum/Technikum - poziom rozszerzony
+    if (classLevel.includes('-rozsz')) {
+      return 70;
+    }
+    // Domyślnie
+    return 50;
+  };
+
+  const price = priceProp || (selectedClass ? calculatePrice(selectedClass) : 0);
   
   const getClassLabel = (classValue: string) => {
     const classMap: Record<string, string> = {
@@ -109,5 +127,5 @@ export default function BookingSummary({
       </p>
     </div>
   );
-}
+} 
 

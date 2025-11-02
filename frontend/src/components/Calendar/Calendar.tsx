@@ -61,12 +61,10 @@ export default function Calendar({ selectedDate, onDateSelect, unavailableDates 
   const renderCalendarDays = () => {
     const days = [];
     
-    // Empty cells for days before the first day of the month
     for (let i = 0; i < startingDayOfWeek; i++) {
       days.push(<div key={`empty-${i}`} className="calendar-day empty"></div>);
     }
 
-    // Days of the month
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
       const isPast = isDatePast(date);
@@ -114,24 +112,6 @@ export default function Calendar({ selectedDate, onDateSelect, unavailableDates 
       </div>
       <div className="calendar-days">
         {renderCalendarDays()}
-      </div>
-      <div className="calendar-legend">
-        <div className="legend-item">
-          <span className="legend-color available"></span>
-          <span>Dostępne</span>
-        </div>
-        <div className="legend-item">
-          <span className="legend-color today"></span>
-          <span>Dzisiaj</span>
-        </div>
-        <div className="legend-item">
-          <span className="legend-color selected"></span>
-          <span>Wybrane</span>
-        </div>
-        <div className="legend-item">
-          <span className="legend-color disabled"></span>
-          <span>Niedostępne</span>
-        </div>
       </div>
     </div>
   );
