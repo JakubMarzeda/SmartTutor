@@ -1,0 +1,71 @@
+.dashboard {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #f8fafc 0%, #ffffff 100%);
+}
+
+.dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.dashboard-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 1.5rem;
+}
+
+.booking-section {
+  margin-top: 2rem;
+}
+
+.booking-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.booking-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.booking-right {
+  position: relative;
+}
+
+.lessons-section {
+  margin-top: 1rem;
+}
+
+@media (max-width: 968px) {
+  .booking-content {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-right {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .dashboard-container {
+    padding: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+  }
+}
+
